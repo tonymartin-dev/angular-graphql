@@ -14,3 +14,15 @@
     margin: auto;
     display: flex;
 }
+
+.product-card{
+    margin: 25px 80px 25px 80px;
+}
+
+.create-form{
+    display: flex;
+    flex-flow: column;
+    max-width: 800px;
+    margin: auto;
+    justify-content: right;
+}

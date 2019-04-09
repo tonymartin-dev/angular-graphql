@@ -13,17 +13,17 @@
       
       <div class="search-container">
         <div class="search-input">
-          <mat-form-field class="example-full-width">
+          <mat-form-field>
             <input matInput placeholder="Get products by category" [(ngModel)]="searchCategory" />
           </mat-form-field>
           <button (click)="getProductByCategory(searchCategory)" name="searchCategory" mat-button > <i class="material-icons">search</i> </button>
         </div>  
-        <button (click)="getAllProducts()" mat-button>Get all Products</button>
+        <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
       </div>
   
       <div class="result-contanier">
         <ng-container *ngIf="productsList" >
-          <mat-card class="example-card" *ngFor="let product of productsList">
+          <mat-card class="product-card" *ngFor="let product of productsList">
             <mat-card-header>
               <mat-card-title>{{product.name}}</mat-card-title>
               <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
@@ -53,7 +53,22 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <button (click)="createProduct()" mat-button>Create Product</button>
+    <div class="create-form">
+        <mat-form-field>
+          <input matInput placeholder="Name" [(ngModel)]="createProductData.name" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Category" [(ngModel)]="createProductData.category" />
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Description" [(ngModel)]="createProductData.description"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="price" [(ngModel)]="createProductData.price" />
+        </mat-form-field>
+        <button (click)="createProduct()" color="primary" mat-raised-button>Create Product</button>
+    </div>
+
   </mat-expansion-panel>
 </mat-accordion>
 
