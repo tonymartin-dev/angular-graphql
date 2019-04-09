@@ -1,22 +1,60 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<label>id:
-  <input [(ngModel)]="idSelected" placeholder="id"/>
-  <button (click)="userById(idSelected)">search</button>
-</label>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Search Products
+      </mat-panel-title>
+      <mat-panel-description>
+        Get a list of products
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 
-<div *ngIf="selectedUser">
-  <p>Name: {{selectedUser.name}}</p>
-  <p>Email: {{selectedUser.email}}</p>
-</div>
+    <div class="search-panel-contain">
+      
+      <div class="search-container">
+        <div class="search-input">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Get products by category" [(ngModel)]="searchCategory" />
+          </mat-form-field>
+          <button (click)="getProductByCategory(searchCategory)" name="searchCategory" mat-button > <i class="material-icons">search</i> </button>
+        </div>  
+        <button (click)="getAllProducts()" mat-button>Get all Products</button>
+      </div>
+  
+      <div class="result-contanier">
+        <ng-container *ngIf="productsList" >
+          <mat-card class="example-card" *ngFor="let product of productsList">
+            <mat-card-header>
+              <mat-card-title>{{product.name}}</mat-card-title>
+              <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{product.description}}</p>
+            </mat-card-content>
+            <mat-card-actions class="price">
+              <p class="right">{{ product.price | currency }}</p>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
+    </div>
 
-<br>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Create Product
+      </mat-panel-title>
+      <mat-panel-description>
+        Create new products using a form
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 
-<button (click)="getAllUsers()">Get all Users</button>
-
-<br>
-
-<button (click)="createUser()">Create User</button>
-
-
+    <button (click)="createProduct()" mat-button>Create Product</button>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <router-outlet></router-outlet>

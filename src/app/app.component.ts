@@ -13,68 +13,63 @@ export class AppComponent {
     private http: HttpClient
   ){}
 
-  usersList = [];
-  selectedUser;
-  idSelected;
-  userById: Function;
-  getAllUsers: Function;
-  createUser: Function;
+  productsList: Array<any> = [];
+  getAllProducts: Function;
+  getProductByCategory: Function;
+  createProduct: Function;
 
   ngOnInit(){
 
-    
-    this.userById = id=>{
-
+    this.getProductByCategory = (category: String)=>{
+      
       let query = {
         query: `query{
-          user(id:"${id}"){
-            id
+          productsByCategory(category:"${category}"){
             name
-            email
+            description
+            category
+            price
           }
         }`
       }
 
       this.http.post( 'http://localhost:4000/graphql', query )
         .subscribe((res:any)=>{
-          this.selectedUser = res.data.user;
-          console.log('User: ', this.selectedUser);
+          this.productsList = res.data.productsByCategory;
+          console.log('Products List: ', this.productsList);
         })
 
     }
-
-    this.getAllUsers = ()=>{
+    
+    this.getAllProducts = ()=>{
       let query = {
-        query: "query{users{_id id name email}}"
+        query: "query{products{name description price category}}"
       }
 
       this.http.post( 'http://localhost:4000/graphql', query )
         .subscribe((res:any)=>{
-          this.usersList = res.data.users;
-          console.log('User List: ', this.usersList);
+          this.productsList = res.data.products;
+          console.log('Products List: ', this.productsList);
         })
 
     }
 
-    this.createUser = () => {
+    this.createProduct = ()=>{
       let query = {
         query: `mutation {
-          addUser(id: "2", name: "Pepe Martínez", email: "pepito@jose.com") {
-            id
+          addProduct(name: "Amethyst Staff", price:"150", category: "Direct", description: "The Amethyst Staff is a phenomenal starting magic weapon given its low mana cost, high damage, and simple crafting recipe. It shoots a single bolt. It has slow speed and low knockback, but with your starting base Mana of 20, this can be used to devastating effect during your first few nights, especially if you get a good Modifier.") {
             name
-            email
+            price
+            description
           }
         }`
       }
       this.http.post( 'http://localhost:4000/graphql', query )
         .subscribe((res:any)=>{
           //this.usersList = res.data.users;
-          console.log('User Created: ', res);
+          console.log('Product Created: ', res);
         })
     }
-    
-
-    console.log(this.usersList)
 
   }
 
