@@ -6,3 +6,39 @@
     background-color: red;
     color: white;
 }
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+//MENU
+
+
+#main-menu{
+    margin-top: 70px;
+    min-width: 200px;
+}
+
+#nav-list{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.navbar-spacer{
+    flex: 1 1 auto;
+}
+
+//CONTAIN
+#main-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#main-content{
+    margin-top: 70px;
+}

@@ -1,0 +1,30 @@
+<div class="search-panel-contain">
+          
+  <div class="search-container">
+    <div class="search-input">
+      <mat-form-field>
+        <input matInput placeholder="Get products by category" [(ngModel)]="searchCategory" />
+      </mat-form-field>
+      <button (click)="getProductByCategory(searchCategory)" name="searchCategory" mat-button > <i class="material-icons">search</i> </button>
+    </div>  
+    <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
+  </div>
+
+  <div class="result-contanier">
+    <ng-container *ngIf="productsList" >
+      <mat-card class="product-card" *ngFor="let product of productsList">
+        <mat-card-header>
+          <mat-card-title>{{product.name}}</mat-card-title>
+          <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{product.description}}</p>
+        </mat-card-content>
+        <mat-card-actions class="price">
+          <p class="right">{{ product.price | currency }}</p>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+  
+</div>

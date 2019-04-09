@@ -1,75 +1,17 @@
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Search Products
-      </mat-panel-title>
-      <mat-panel-description>
-        Get a list of products
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <div class="search-panel-contain">
-      
-      <div class="search-container">
-        <div class="search-input">
-          <mat-form-field>
-            <input matInput placeholder="Get products by category" [(ngModel)]="searchCategory" />
-          </mat-form-field>
-          <button (click)="getProductByCategory(searchCategory)" name="searchCategory" mat-button > <i class="material-icons">search</i> </button>
-        </div>  
-        <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
-      </div>
+<!-- NavBar -->
+<app-navbar></app-navbar>
+
+<mat-sidenav-container id="main-container" hasBackdrop="false">
   
-      <div class="result-contanier">
-        <ng-container *ngIf="productsList" >
-          <mat-card class="product-card" *ngFor="let product of productsList">
-            <mat-card-header>
-              <mat-card-title>{{product.name}}</mat-card-title>
-              <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{product.description}}</p>
-            </mat-card-content>
-            <mat-card-actions class="price">
-              <p class="right">{{ product.price | currency }}</p>
-            </mat-card-actions>
-          </mat-card>
-        </ng-container>
-      </div>
-    </div>
+  <!-- Side Menu -->
+  <mat-sidenav id="main-menu" #sidenav mode="over" [(opened)]="sharedService.menuOpen">
+    <app-main-menu></app-main-menu>
+  </mat-sidenav>
 
-  </mat-expansion-panel>
-  <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false"
-  >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Create Product
-      </mat-panel-title>
-      <mat-panel-description>
-        Create new products using a form
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <div class="create-form">
-        <mat-form-field>
-          <input matInput placeholder="Name" [(ngModel)]="createProductData.name" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Category" [(ngModel)]="createProductData.category" />
-        </mat-form-field>
-        <mat-form-field>
-          <textarea matInput placeholder="Description" [(ngModel)]="createProductData.description"></textarea>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="price" [(ngModel)]="createProductData.price" />
-        </mat-form-field>
-        <button (click)="createProduct()" color="primary" mat-raised-button>Create Product</button>
-    </div>
-
-  </mat-expansion-panel>
-</mat-accordion>
-
-<router-outlet></router-outlet>
+  <!-- Main Content -->
+  <mat-sidenav-content id="main-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
