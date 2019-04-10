@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { ShopComponent } from './pages/shop/shop.component';
 import { AdminAreaComponent } from './pages/admin-area/admin-area.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { CreateProductComponent } from './pages/admin-area/create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
     ShopComponent,
     AdminAreaComponent,
     NavbarComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    CreateProductComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
     MatSnackBarModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   entryComponents: [AppComponent],
   providers: [],

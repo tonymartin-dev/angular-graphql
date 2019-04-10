@@ -1,7 +1,12 @@
-.create-form{
-    display: flex;
-    flex-flow: column;
-    max-width: 800px;
-    margin: auto;
-    justify-content: right;
+#admin-tabs{
+    height: 100%;
+    .tab-container{
+        height: 100%;
+    }
+    .mat-tab-group.mat-tab-group-inverted-header{
+        height: 100%;
+    }
+    .mat-tab-body-wrapper{
+        height: 100%;
+    }
 }

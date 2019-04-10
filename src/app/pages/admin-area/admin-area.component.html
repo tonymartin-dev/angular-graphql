@@ -1,15 +1,8 @@
-<div class="create-form">
-  <mat-form-field>
-    <input matInput placeholder="Name" [(ngModel)]="createProductData.name" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Category" [(ngModel)]="createProductData.category" />
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput placeholder="Description" [(ngModel)]="createProductData.description"></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="price" [(ngModel)]="createProductData.price" />
-  </mat-form-field>
-  <button (click)="createProduct()" color="primary" mat-raised-button>Create Product</button>
-</div>
+<mat-tab-group id="admin-tabs" headerPosition="below">
+  <mat-tab label="Create Product" class="tab-container"> 
+    <app-create-product></app-create-product>
+  </mat-tab>
+  <mat-tab label="Edit Product"> Content 2 </mat-tab>
+  <mat-tab label="Create Category"> Content 3 </mat-tab>
+</mat-tab-group>
+
