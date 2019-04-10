@@ -1,0 +1,15 @@
+<div class="create-form">
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="editProductData.name" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Category" [(ngModel)]="editProductData.category" />
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="editProductData.description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="price" [(ngModel)]="editProductData.price" />
+  </mat-form-field>
+  <button (click)="editProduct()" color="primary" mat-raised-button>Save Changes</button>
+</div> 

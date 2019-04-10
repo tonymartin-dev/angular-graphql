@@ -13,11 +13,12 @@ export class ProductsService {
 
   productsList: Array<Product> = [];
 
-  getProductByCategory = (category: String)=>{
+  getProductById = (id: String)=>{
       
     let query = {
       query: `query{
-        productsByCategory(category:"${category}"){
+        product(_id:"${id}"){
+          _id
           name
           description
           category
@@ -33,7 +34,7 @@ export class ProductsService {
   
   getAllProducts = ()=>{
     let query = {
-      query: "query{products{name description price category}}"
+      query: "query{products{_id name description price category}}"
     }
 
     return this.http.post( 'http://localhost:4000/graphql', query )
@@ -44,11 +45,13 @@ export class ProductsService {
     let query = {
       query: `mutation {
         addProduct(
+          _id: null,
           name:         "${createProductData.name}",
           category:     "${createProductData.category}",
           description:  "${createProductData.description}",
           price:        "${createProductData.price}"
         ) {
+          _id
           name
           category
           description
@@ -58,6 +61,29 @@ export class ProductsService {
     };
 
     return this.http.post( 'http://localhost:4000/graphql', query )
+  }
+
+  editProduct = (editProductData:Product)=>{
+    let query = {
+      query: `mutation {
+        editProduct(
+            _id: "${editProductData._id}", 
+            name: "${editProductData.name}", 
+            description: "${editProductData.description}", 
+            price: "${editProductData.price}", 
+            category: "${editProductData.category}"
+        ) {
+            _id
+            name
+            category
+            description
+            price
+        }
+      }`
+    }
+
+    return this.http.post( 'http://localhost:4000/graphql', query )
+
   }
 
 

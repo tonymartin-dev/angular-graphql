@@ -15,7 +15,7 @@ export class CreateProductComponent implements OnInit {
     private productsService: ProductsService
     ) { }
 
-  createProductData:    Product   = {name: null, description: null, price: null, category: null};
+  createProductData:    Product   = {_id: null, name: null, description: null, price: null, category: null};
   createProduct:        Function;
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class CreateProductComponent implements OnInit {
             (res:any)=>{
               console.log('Product Created: ', res);
               this.snackBar.open('The product has been created', 'OK', { duration: 2000 });
-              this.createProductData = {name: null, description: null, price: null, category: null};
+              this.createProductData = {_id: null, name: null, description: null, price: null, category: null};
             },
             (err:any)=>{
               console.log('Error creating Product: ', err);

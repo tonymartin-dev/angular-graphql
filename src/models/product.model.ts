@@ -1,9 +1,11 @@
 export class Product {
+    _id: string
     name: string
     description: string
     price: string
     category: string
-    constructor(name, description, price, category){
+    constructor(_id, name, description, price, category){
+        this._id = _id
         this.name = name
         this.description = description
         this.price = price

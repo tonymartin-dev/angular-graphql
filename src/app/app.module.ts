@@ -23,6 +23,7 @@ import { AdminAreaComponent } from './pages/admin-area/admin-area.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { CreateProductComponent } from './pages/admin-area/create-product/create-product.component';
+import { EditProductComponent } from './pages/admin-area/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CreateProductComponent } from './pages/admin-area/create-product/create
     AdminAreaComponent,
     NavbarComponent,
     MainMenuComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

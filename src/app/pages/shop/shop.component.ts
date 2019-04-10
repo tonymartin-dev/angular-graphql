@@ -15,12 +15,12 @@ export class ShopComponent implements OnInit {
 
   productsList:         Array<Product>  = [];
   getAllProducts:       Function;
-  getProductByCategory: Function;
+  getProductById:       Function;
 
   ngOnInit() {
 
-    this.getProductByCategory = (category: String) => {
-      this.productsService.getProductByCategory(category)
+    this.getProductById = (category: String) => {
+      this.productsService.getProductById(category)
         .subscribe((res:any)=>{
           this.productsList = res.data.productsByCategory;
           console.log('Products List: ', this.productsList);

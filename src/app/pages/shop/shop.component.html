@@ -3,9 +3,9 @@
   <div class="search-container">
     <div class="search-input">
       <mat-form-field>
-        <input matInput placeholder="Get products by category" [(ngModel)]="searchCategory" />
+        <input matInput placeholder="Get products by id" [(ngModel)]="searchId" />
       </mat-form-field>
-      <button (click)="getProductByCategory(searchCategory)" name="searchCategory" mat-button > <i class="material-icons">search</i> </button>
+      <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
     <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
   </div>
