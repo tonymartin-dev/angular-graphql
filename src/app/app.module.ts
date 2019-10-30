@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatDialogModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +24,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { CreateProductComponent } from './pages/admin-area/create-product/create-product.component';
 import { EditProductComponent } from './pages/admin-area/edit-product/edit-product.component';
+import { NewProductModalComponent } from './components/new-product-modal/new-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditProductComponent } from './pages/admin-area/edit-product/edit-produ
     NavbarComponent,
     MainMenuComponent,
     CreateProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    NewProductModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +52,10 @@ import { EditProductComponent } from './pages/admin-area/edit-product/edit-produ
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ],
-  entryComponents: [AppComponent],
+  entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

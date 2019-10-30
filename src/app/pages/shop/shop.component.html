@@ -8,6 +8,7 @@
       <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
     <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
+    <button (click)="openNewProductModal()" color="primary" mat-raised-button>Create New Product</button>
   </div>
 
   <div class="result-contanier">
@@ -19,15 +20,15 @@
         <ng-template #editTpl>
           <mat-card-header>
             <mat-card-title>
-                <mat-form-field class="full-width">
-                  <input matInput [(ngModel)]="product.name">
-                </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput [(ngModel)]="product.name">
+              </mat-form-field>
             </mat-card-title>
             <mat-card-subtitle>
               <mat-form-field class="full-width">
                   <input matInput [(ngModel)]="product.category">
-                </mat-form-field>
-              </mat-card-subtitle>
+              </mat-form-field>
+            </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
               <mat-form-field class="full-width">

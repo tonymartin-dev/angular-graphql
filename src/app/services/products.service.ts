@@ -45,22 +45,21 @@ export class ProductsService {
     let query = {
       query: `mutation {
         addProduct(
-          _id: null,
           name:         "${createProductData.name}",
-          category:     "${createProductData.category}",
           description:  "${createProductData.description}",
-          price:        "${createProductData.price}"
+          price:        "${createProductData.price}",
+          category:     "${createProductData.category}"
         ) {
           _id
           name
-          category
           description
           price
+          category
         }
       }`
     };
 
-    return this.http.post( 'http://localhost:4000/graphql', query )
+    return this.http.post( 'http://localhost:4000/graphql', query );
   }
 
   editProduct = (editProductData:Product)=>{
