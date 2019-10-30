@@ -1,15 +1,15 @@
 <div class="search-panel-contain">
           
-  <div class="search-container">
+  <mat-toolbar class="search-container">
+    <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
+    <button (click)="openNewProductModal()" color="primary" mat-raised-button>Create New Product</button>
     <div class="search-input">
       <mat-form-field>
         <input matInput placeholder="Get products by id" [(ngModel)]="searchId" />
       </mat-form-field>
       <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
-    <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
-    <button (click)="openNewProductModal()" color="primary" mat-raised-button>Create New Product</button>
-  </div>
+  </mat-toolbar>
 
   <div class="result-contanier">
     <ng-container *ngIf="productsList" >
@@ -17,8 +17,10 @@
         
         <div *ngIf="product.edit; then editTpl else tpl"></div>
         
+        <!-- EDIT -->
         <ng-template #editTpl>
-          <mat-card-header>
+
+          <mat-card-header class="product-card-header">
             <mat-card-title>
               <mat-form-field class="full-width">
                 <input matInput [(ngModel)]="product.name">
@@ -30,47 +32,65 @@
               </mat-form-field>
             </mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content>
-              <mat-form-field class="full-width">
-                <textarea
-                  matInput
-                  cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize"
-                  cdkAutosizeMinRows="1"
-                  cdkAutosizeMaxRows="5"
-                  [(ngModel)]="product.description">
-                </textarea>
-              </mat-form-field>
+
+          <mat-card-content class="product-card-content">
+            <mat-form-field class="full-width">
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [(ngModel)]="product.description">
+              </textarea>
+            </mat-form-field>
           </mat-card-content>
+
+          <mat-card-footer class="product-card-footer">
+            <mat-form-field>
+              <input type="number" matInput [(ngModel)]="product.price">
+            </mat-form-field>
+            <mat-card-actions class="product-card-actions">
+              <button (click)="cancelProductChanges(product)" color="warn" mat-raised-button>
+                <i class="material-icons">cancel</i> Cancel
+              </button>
+              <button (click)="updateProduct(product)" color="primary" mat-raised-button>
+                <i class="material-icons">save</i> Save
+              </button>
+            </mat-card-actions>
+          </mat-card-footer>
+
         </ng-template>
 
+        <!-- REGULAR -->
         <ng-template #tpl>
-          <mat-card-header>
+
+          <mat-card-header class="product-card-header">
             <mat-card-title>{{product.name}}</mat-card-title>
             <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+            <div class="more-menu-btn">
+              <button mat-button [matMenuTriggerFor]="menu">
+                <i class="material-icons">more_vert</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="openEditMode(product)" mat-menu-item>
+                  <i class="material-icons">edit</i> Edit Product
+                </button>
+                <button (click)="deleteProduct(product)" mat-menu-item> 
+                  <i class="material-icons">delete</i> Delete Product
+                </button>
+              </mat-menu>
+            </div>
           </mat-card-header>
-          <mat-card-content>
-            <p>{{product.description}}</p>
-          </mat-card-content>
-        </ng-template>
 
-        <mat-card-footer class="card-footer">
-          <span class="right">{{ product.price | currency }}</span>
-          <mat-card-actions class="card-actions">
-            <button *ngIf="!product.edit" (click)="openEditMode(product)" mat-button>
-              <i class="material-icons">edit</i> Edit Product
-            </button>
-            <button *ngIf="!product.edit" (click)="deleteProduct(product)" mat-button> 
-              <i class="material-icons">delete</i> Delete Product
-            </button>
-            <button *ngIf="product.edit" (click)="updateProduct(product)" mat-button>
-              <i class="material-icons">save</i> Save Changes
-            </button>
-            <button *ngIf="product.edit" (click)="cancelProductChanges(product)" mat-button>
-              <i class="material-icons">cancel</i> Cancel Changes
-            </button>
-          </mat-card-actions>
-        </mat-card-footer>
+          <mat-card-content class="product-card-content">
+            <p>{{product.description}}</p>
+            <div class="product-card-footer">
+              <span>{{ product.price | currency }}</span>
+            </div>
+          </mat-card-content>
+
+        </ng-template>
 
       </mat-card>
     </ng-container>

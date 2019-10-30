@@ -1,29 +1,26 @@
-.search-panel-contain{
-    display: flex
-}
-.card-footer{
-    text-align: right;
-    padding-right: 20px;
-}
-.card-actions{
-    display: flex;
-    justify-content: center;
-}
-.search-container{
-    max-width: 600px;
-}
 .search-input {
     min-width: 150px;
-    width: 100%;
-    margin: auto;
     display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
 .product-card{
     margin: 25px 80px 25px 80px;
-}
-
-
-.full-width{
-    width: 100%;
+    padding: 21px;
+    .more-menu-btn{
+        flex-grow: 1;
+        text-align: right;
+    }
+    .product-card-content{
+        margin: 0 16px;
+    }
+    .product-card-footer{
+        text-align: right;
+        padding-right: 20px;
+    }
+    .product-card-actions{
+        display: flex;
+        justify-content: center;
+    }
 }

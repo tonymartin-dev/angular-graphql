@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule, MatDialogModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatMenuModule} from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,7 +54,8 @@ import { NewProductModalComponent } from './components/new-product-modal/new-pro
     MatSidenavModule,
     MatListModule,
     MatTabsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],
