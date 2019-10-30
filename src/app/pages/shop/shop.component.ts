@@ -31,7 +31,18 @@ export class ShopComponent implements OnInit {
   }
 
   public deleteProduct = (_product: Product)=>{
-
+    this.productsService.deleteProduct(_product._id).subscribe(
+      res=>{
+        console.log('OK', res);
+        _product.edit = false;
+        this.productsList.splice(this.getProductIndex(_product))
+        this.openSnackBar('Producto eliminado', 'Aceptar');
+      },
+      err=>{
+        console.log('KO', err);
+        this.openSnackBar('Se produjo un error en el borrado de datos', 'Aceptar');
+      }
+    );
   }
 
   public updateProduct = (_product: Product)=>{
@@ -51,7 +62,7 @@ export class ShopComponent implements OnInit {
   public cancelProductChanges = async(_product?: Product)=>{
     _product = _product ? _product : this.productsList.find(prod=>prod.edit);
     if(!_product) return;
-    const index = this.productsList.indexOf(_product);
+    const index = this.getProductIndex(_product);
     this.productsList[index] = this.productBackup;
     this.productsList[index].edit = false;
     console.log('Product restored: ', _product)
@@ -103,6 +114,12 @@ export class ShopComponent implements OnInit {
         this.openSnackBar('Se produjo un error en el guardado de datos', 'Aceptar');
       }
     )
+
+  }
+
+  private getProductIndex = (_product)=>{
+    let productInList = this.productsList.find((product, i)=> product._id === _product._id)
+    return this.productsList.indexOf(productInList);
 
   }
 

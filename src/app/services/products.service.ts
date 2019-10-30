@@ -11,11 +11,10 @@ export class ProductsService {
     private http: HttpClient,
   ){}
 
-  productsList: Array<Product> = [];
 
-  getProductById = (id: String)=>{
+  public getProductById = (id: String)=>{
       
-    let query = {
+    const query = {
       query: `query{
         product(_id:"${id}"){
           _id
@@ -30,19 +29,19 @@ export class ProductsService {
     return this.http.post( 'http://localhost:4000/graphql', query )
       
 
-  }
+  };
   
-  getAllProducts = ()=>{
-    let query = {
+  public getAllProducts = ()=>{
+    const query = {
       query: "query{products{_id name description price category}}"
     }
 
     return this.http.post( 'http://localhost:4000/graphql', query )
 
-  }
+  };
 
-  createProduct = (createProductData:Product)=>{
-    let query = {
+  public createProduct = (createProductData:Product)=>{
+    const query = {
       query: `mutation {
         addProduct(
           name:         "${createProductData.name}",
@@ -60,10 +59,10 @@ export class ProductsService {
     };
 
     return this.http.post( 'http://localhost:4000/graphql', query );
-  }
+  };
 
-  editProduct = (editProductData:Product)=>{
-    let query = {
+  public editProduct = (editProductData:Product)=>{
+    const query = {
       query: `mutation {
         editProduct(
             _id: "${editProductData._id}", 
@@ -83,7 +82,25 @@ export class ProductsService {
 
     return this.http.post( 'http://localhost:4000/graphql', query )
 
-  }
+  };
 
+  public deleteProduct = (_deleteProductId:string)=>{
+    const query = {
+      query: `mutation {
+        deleteProduct(
+            _id: "${_deleteProductId}"
+        ) {
+            _id
+            name
+            description
+            price
+            category
+        }
+      }`
+    }
+
+    return this.http.post( 'http://localhost:4000/graphql', query )
+
+  }
 
 }
