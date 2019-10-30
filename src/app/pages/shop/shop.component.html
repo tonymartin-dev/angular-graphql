@@ -1,7 +1,6 @@
 <div class="search-panel-contain">
           
   <mat-toolbar class="search-container">
-    <button (click)="getAllProducts()" color="primary" mat-raised-button>Get all Products</button>
     <button (click)="openNewProductModal()" color="primary" mat-raised-button>Create New Product</button>
     <div class="search-input">
       <mat-form-field>
@@ -10,6 +9,7 @@
       <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
   </mat-toolbar>
+  <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="handlePageEvent($event)"></mat-paginator>
 
   <div class="result-contanier">
     <ng-container *ngIf="productsList" >

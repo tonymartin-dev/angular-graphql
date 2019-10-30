@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Product }           from '../../../models/product.model';
-import {MatDialog, MatDialogRef, 
-  MAT_DIALOG_DATA}           from '@angular/material/dialog';
+import { Component, OnInit, Inject }  from '@angular/core';
+import { Product }                    from '../../../models/product.model';
+import { MatDialog, MatDialogRef, 
+  MAT_DIALOG_DATA }                    from '@angular/material/dialog';
 
 export interface DialogData {
   animal: string;

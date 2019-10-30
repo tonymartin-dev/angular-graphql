@@ -1,7 +1,7 @@
 import { Component, OnInit }        from '@angular/core';
 import { MatSnackBar }              from '@angular/material/snack-bar';
-import {MatDialog, MatDialogRef, 
-  MAT_DIALOG_DATA}                  from '@angular/material/dialog';
+import { MatDialog }                from '@angular/material/dialog';
+import { PageEvent }                from '@angular/material/paginator';
 import { Product }                  from '../../../models/product.model';
 import { ProductsService }          from '../../services/products.service';
 import { NewProductModalComponent } from 'src/app/components/new-product-modal/new-product-modal.component';
@@ -16,12 +16,12 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private productsService:  ProductsService,
-    private dialog:            MatDialog,
+    private dialog:           MatDialog,
     private snackBar:         MatSnackBar
   ){}
 
-  productsList:         Array<Product>  = [];
-  productBackup:        Product;
+  productsList:   Array<Product>  = [];
+  productBackup:  Product;
 
   public openEditMode = (_product: Product)=>{
     this.cancelProductChanges();
@@ -123,18 +123,18 @@ export class ShopComponent implements OnInit {
 
   }
 
-  private openSnackBar(message: string, action: string) {
+  private openSnackBar = (message: string, action: string)=>{
     this.snackBar.open(message, action, {
       duration: 2000,
     });
   }
 
+  public handlePageEvent = (_e:PageEvent)=>{
+    console.log(_e)
+  }
+
   ngOnInit() {
-
-    
-
-    
-
+    this.getAllProducts();
   }
 
 }

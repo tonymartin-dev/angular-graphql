@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatListModule, MatDialogModule } from '@angular/material';
+import { MatListModule, MatDialogModule, MatPaginatorModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule} from '@angular/material/menu';
 
@@ -55,7 +55,8 @@ import { NewProductModalComponent } from './components/new-product-modal/new-pro
     MatListModule,
     MatTabsModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
   ],
   entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],
