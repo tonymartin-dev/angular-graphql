@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product }    from '../../models/product.model'
+import { HttpService }from '../services/http.service'
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class ProductsService {
 
   constructor(
     private http: HttpClient,
+    private httpSvc: HttpService
   ){}
 
 
@@ -26,8 +28,7 @@ export class ProductsService {
       }`
     }
 
-    return this.http.post( 'http://localhost:4000/graphql', query )
-      
+    return this.httpSvc.request({body: query, log: 'getProductById'})
 
   };
   
@@ -41,7 +42,7 @@ export class ProductsService {
       }`
     }
 
-    return this.http.post( 'http://localhost:4000/graphql', query )
+    return this.httpSvc.request({body: query, log: 'getAllProducts'});
 
   };
 
@@ -63,7 +64,8 @@ export class ProductsService {
       }`
     };
 
-    return this.http.post( 'http://localhost:4000/graphql', query );
+    return this.httpSvc.request({body: query, log: 'createProduct'});
+
   };
 
   public editProduct = (editProductData:Product)=>{
@@ -85,7 +87,7 @@ export class ProductsService {
       }`
     }
 
-    return this.http.post( 'http://localhost:4000/graphql', query )
+    return this.httpSvc.request({body: query, log: 'editProduct'});
 
   };
 
@@ -104,7 +106,7 @@ export class ProductsService {
       }`
     }
 
-    return this.http.post( 'http://localhost:4000/graphql', query )
+    return this.httpSvc.request({body: query, log: 'deleteProduct'});
 
   }
 

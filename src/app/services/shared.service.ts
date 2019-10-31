@@ -10,9 +10,28 @@ export class SharedService {
   /**
    * MENU
    */
-  menuOpen = false;
+  public menuOpen = false;
 
-  toggleMenu = ()=>{
+  public toggleMenu = ()=>{
     this.menuOpen = !this.menuOpen
   }
+
+  /**
+   * SPINNER
+   */
+  private spinnerCounter = 0;
+  public isLoading = false;
+  
+  public showSpinner = ()=>{
+    console.log('show')
+    this.spinnerCounter++;
+    setTimeout( ()=> this.isLoading = !!this.spinnerCounter)
+  }
+
+  public hideSpinner = ()=>{
+    console.log('hide')
+    this.spinnerCounter--;
+    setTimeout( ()=> this.isLoading = !!this.spinnerCounter)
+  }
+
 }

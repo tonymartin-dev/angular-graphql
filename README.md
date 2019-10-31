@@ -1,27 +1,74 @@
-# AngularGraphql
+# Playing with GraphQL
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This is a personal experiment, my first contact with graphQL both from the frontend and the Backend perspective. 
 
-## Development server
+Backend is built in node.js-express.js and moongoose/mongoDB.
+Based on This Tutorial: [https://medium.freecodecamp.org/how-to-set-up-a-graphql-server-using-node-js-express-mongodb-52421b73f474]
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Frontend is built in Angular 7 and ngMaterial
 
-## Code scaffolding
+## Install Dependencies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Enter in frontend and backend folder and run 
 
-## Build
+```bash
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Backend
 
-## Running unit tests
+Before launching backend, we need to run our mongo database.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Windows
 
-## Running end-to-end tests
+1. Navigate to mongoDB installation folder _(default: C:\Users\amadia\mongoDB\MongoDB\Server\4.0)_
+2. Run `mongodb` in the command line
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Once MongoDB is running, we can launch our backend using the folowing command:
+```bash
+npm start
+```
 
-## Further help
+### Linux
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Using this commands we can control MongoDB
+* Check Status:
+```bash
+sudo systemctl status mongodb
+```
+* MongoDB Data
+```bash
+mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+```
+* Start, stop or restart mongoDB Service
+```bash
+sudo systemctl start mongodb
+sudo systemctl stop mongodb
+sudo systemctl restart mongodb
+```
+By default, MongoDB is configured to start automatically with the server. If you wish to disable the automatic startup, type:
+```bash
+sudo systemctl disable mongodb
+```
+It’s just as easy to enable it again. To do this, use:
+```bash
+sudo systemctl enable mongodb
+```
+
+### Launch Backend
+_Repository: https://github.com/tonymartin-dev/mongo-graphql_
+
+Just type
+
+```bash
+npm start
+```
+
+## Frontend
+_Repository: https://github.com/tonymartin-dev/angular-graphql_
+
+To launch frontend, just type
+
+```bash
+npm start
+```

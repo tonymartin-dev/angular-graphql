@@ -8,8 +8,9 @@ import { SharedService } from './services/shared.service'
 export class AppComponent implements OnInit {
   
   constructor(
-    private sharedService: SharedService
+    public sharedService: SharedService
   ){}
+
   
   ngOnInit(){
 

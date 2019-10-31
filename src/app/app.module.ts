@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatListModule, MatDialogModule, MatPaginatorModule } from '@angular/material';
+import { MatListModule, MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule} from '@angular/material/menu';
 
@@ -26,6 +26,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { CreateProductComponent } from './pages/admin-area/create-product/create-product.component';
 import { EditProductComponent } from './pages/admin-area/edit-product/edit-product.component';
 import { NewProductModalComponent } from './components/new-product-modal/new-product-modal.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NewProductModalComponent } from './components/new-product-modal/new-pro
     MainMenuComponent,
     CreateProductComponent,
     EditProductComponent,
-    NewProductModalComponent
+    NewProductModalComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { NewProductModalComponent } from './components/new-product-modal/new-pro
     MatTabsModule,
     MatDialogModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],
