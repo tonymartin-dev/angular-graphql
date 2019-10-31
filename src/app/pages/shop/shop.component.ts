@@ -38,7 +38,7 @@ export class ShopComponent implements OnInit {
       res=>{
         console.log('OK', res);
         _product.edit = false;
-        this.productsList.splice(this.getProductIndex(_product))
+        this.productsList.splice(this.getProductIndex(_product), 1)
         this.openSnackBar('Producto eliminado', 'Aceptar');
       },
       err=>{
