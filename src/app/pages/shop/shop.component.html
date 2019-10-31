@@ -9,7 +9,7 @@
       <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
   </mat-toolbar>
-  <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="handlePageEvent($event)"></mat-paginator>
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="handlePageEvent($event)"></mat-paginator>
 
   <div class="result-contanier">
     <ng-container *ngIf="productsList" >

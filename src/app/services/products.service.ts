@@ -31,9 +31,14 @@ export class ProductsService {
 
   };
   
-  public getAllProducts = ()=>{
+  public getAllProducts = (_elementsPerPage:number=0, _pageNumber:number=0)=>{
+    const elementsSkipped = _pageNumber * _elementsPerPage;
     const query = {
-      query: "query{products{_id name description price category}}"
+      query: `query{
+        products(limit: ${_elementsPerPage}, skip: ${elementsSkipped}){
+          _id name description price category
+        }
+      }`
     }
 
     return this.http.post( 'http://localhost:4000/graphql', query )

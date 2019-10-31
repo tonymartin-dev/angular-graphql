@@ -22,6 +22,9 @@ export class ShopComponent implements OnInit {
 
   productsList:   Array<Product>  = [];
   productBackup:  Product;
+  length:         number          = 0;
+  pageSize:       number          = 5;
+  pageSizeOptions:Array<number>   = [5, 10, 25, 100];
 
   public openEditMode = (_product: Product)=>{
     this.cancelProductChanges();
@@ -84,6 +87,7 @@ export class ShopComponent implements OnInit {
           product.edit = false;
         });
         this.productsList = res.data.products;
+        this.length = this.productsList.length;
         console.log('Products List: ', this.productsList);
       })
   }
