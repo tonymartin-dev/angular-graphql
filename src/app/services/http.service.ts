@@ -97,11 +97,13 @@ export class HttpService {
     const msg = _config.feedbackMsg ? _config.feedbackMsg : defaultMsg
     switch(_config.feedbackMode){
       case 'snackBar':
-        this.snackBar.open('Guardado con éxito', 'Aceptar', {
+        this.snackBar.open(msg, 'Aceptar', {
           duration: 2000,
         });
+        break;
       case 'page':
-        console.log('TODO: Redirect')
+        console.log('TODO: Redirect');
+        break;
     }
   }
 

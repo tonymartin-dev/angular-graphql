@@ -23,13 +23,11 @@ export class SharedService {
   public isLoading = false;
   
   public showSpinner = ()=>{
-    console.log('show')
     this.spinnerCounter++;
     setTimeout( ()=> this.isLoading = !!this.spinnerCounter)
   }
 
   public hideSpinner = ()=>{
-    console.log('hide')
     this.spinnerCounter--;
     setTimeout( ()=> this.isLoading = !!this.spinnerCounter)
   }
