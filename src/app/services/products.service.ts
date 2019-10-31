@@ -108,4 +108,14 @@ export class ProductsService {
 
   }
 
+  public countProducts = ()=>{
+    const query = {
+      query: `query{
+        productsCount(name: "")
+      }`
+    }
+
+    return this.httpSvc.request({body: query, log: 'countProducts'});
+  }
+
 }

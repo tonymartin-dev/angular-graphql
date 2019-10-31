@@ -5,6 +5,8 @@ import { PageEvent }                from '@angular/material/paginator';
 import { Product }                  from '../../../models/product.model';
 import { ProductsService }          from '../../services/products.service';
 import { NewProductModalComponent } from 'src/app/components/new-product-modal/new-product-modal.component';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { Category } from 'src/models/category.model';
 
 
 @Component({
@@ -16,15 +18,18 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private productsService:  ProductsService,
+    private categoriesService:CategoriesService,
     private dialog:           MatDialog,
     private snackBar:         MatSnackBar
   ){}
 
   productsList:   Array<Product>  = [];
+  categoriesList: Array<Category> = [];
   productBackup:  Product;
   length:         number          = 0;
   pageSize:       number          = 5;
   pageSizeOptions:Array<number>   = [5, 10, 25, 100];
+  currentPage:    number = 0;
 
   public openEditMode = (_product: Product)=>{
     this.cancelProductChanges();
@@ -81,8 +86,8 @@ export class ShopComponent implements OnInit {
   }
 
   public getAllProducts = ()=>{
-    this.productsService.getAllProducts()
-      .subscribe((res:any)=>{
+    const observable = this.productsService.getAllProducts(this.pageSize, this.currentPage)
+    observable.subscribe((res:any)=>{
         res.data.products.forEach(product => {
           product.edit = false;
         });
@@ -90,6 +95,15 @@ export class ShopComponent implements OnInit {
         this.length = this.productsList.length;
         console.log('Products List: ', this.productsList);
       })
+
+    this.productsService.countProducts().subscribe(
+      res=>{
+        this.length = res.data.productsCount;
+        console.log('length: ', this.length)
+      }
+    )
+
+    return observable.toPromise();
   }
 
   public openNewProductModal = ()=>{
@@ -136,10 +150,29 @@ export class ShopComponent implements OnInit {
 
   public handlePageEvent = (_e:PageEvent)=>{
     console.log(_e)
+    this.currentPage = _e.pageIndex;
+    this.init();
   }
 
+  private getAllCategories = ()=>{
+    const observable = this.categoriesService.getAllCategories()
+    observable.subscribe(res=>{
+      this.categoriesList = res.data.categories;
+    });
+    return observable.toPromise()
+  }
+
+  public getCategoryName = (_catId: string)=>{
+    return this.categoriesList.find(cat=>cat._id === _catId).name
+  }
+
+  private init = async()=>{
+    await this.getAllCategories();
+    await this.getAllProducts();    
+  }
+  
   ngOnInit() {
-    this.getAllProducts();
+    this.init();
   }
 
 }
