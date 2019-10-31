@@ -12,7 +12,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatListModule, MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatListModule, MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, 
+  MatOptionModule, 
+  MatSelectModule} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule} from '@angular/material/menu';
 
@@ -59,7 +61,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     MatDialogModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],

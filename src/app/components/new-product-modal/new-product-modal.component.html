@@ -5,8 +5,13 @@
     <input matInput [(ngModel)]="product.name" placeholder="Product Name">
   </mat-form-field>
 
-  <mat-form-field class="full-width">
-      <input matInput [(ngModel)]="product.category" placeholder="Product Category">
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="product.category">
+      <mat-option *ngFor="let category of categoriesList" [value]="category._id">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field class="full-width">

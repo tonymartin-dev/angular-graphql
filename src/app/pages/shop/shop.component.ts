@@ -103,6 +103,7 @@ export class ShopComponent implements OnInit {
       console.log('The dialog was closed', _product);
       if(_product)
         this.createProduct(_product);
+        this.getAllProducts();
     });
   }
 
