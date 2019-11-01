@@ -19,7 +19,7 @@ export class NewProductModalComponent implements OnInit {
   constructor(
     private categoriesSvc: CategoriesService,
     public dialogRef: MatDialogRef<NewProductModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) 
+    @Inject(MAT_DIALOG_DATA) public data: {categories: Array<Category>}) 
   {}
 
   public product: Product = {
@@ -34,11 +34,7 @@ export class NewProductModalComponent implements OnInit {
   public categoriesList: Array<Category>
 
   ngOnInit() {
-    this.categoriesSvc.getAllCategories().subscribe(
-      res=>{
-        this.categoriesList = res.data.categories;
-      }
-    )
+    this.categoriesList = this.data.categories;
   }
 
 }

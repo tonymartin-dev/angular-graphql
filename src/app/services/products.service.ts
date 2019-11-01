@@ -29,6 +29,24 @@ export class ProductsService {
     return this.httpSvc.request({body: query, log: 'getProductById'})
 
   };
+
+  public getProductsByName = (name: String)=>{
+      
+    const query = {
+      query: `query{
+        productsByName(name:"${name}"){
+          _id
+          name
+          description
+          category
+          price
+        }
+      }`
+    }
+
+    return this.httpSvc.request({body: query, log: 'getProductById'})
+
+  };
   
   public getAllProducts = (_elementsPerPage:number=0, _pageNumber:number=0)=>{
     const elementsSkipped = _pageNumber * _elementsPerPage;

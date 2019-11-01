@@ -77,10 +77,10 @@ export class ShopComponent implements OnInit {
     return;
   }
 
-  public getProductById = (category: String) => {
-    this.productsService.getProductById(category)
+  public getProductsByName = (_name: String) => {
+    this.productsService.getProductsByName(_name)
       .subscribe((res:any)=>{
-        this.productsList = res.data.productsByCategory;
+        this.productsList = res.data.productsByName;
         console.log('Products List: ', this.productsList);
       });
   }
@@ -110,14 +110,16 @@ export class ShopComponent implements OnInit {
     const dialogRef = this.dialog.open(NewProductModalComponent, {
       width: '550px',
       autoFocus: true,
-      hasBackdrop: true
+      hasBackdrop: true,
+      data: {categories: this.categoriesList}
     });
 
     dialogRef.afterClosed().subscribe(_product => {
       console.log('The dialog was closed', _product);
-      if(_product)
+      if(_product){
         this.createProduct(_product);
         this.getAllProducts();
+      }
     });
   }
 
