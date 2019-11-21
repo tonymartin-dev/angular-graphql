@@ -1,15 +1,21 @@
 <div class="search-panel-contain">
           
-  <mat-toolbar class="search-container">
+  <mat-toolbar class="tools-bar">
     <button (click)="openNewProductModal()" color="primary" mat-raised-button>Create New Product</button>
     <div class="search-input">
       <mat-form-field>
-        <input matInput placeholder="Get products by id" [(ngModel)]="searchId" />
+        <input matInput placeholder="Search by name" [(ngModel)]="searchName" />
       </mat-form-field>
-      <button (click)="getProductById(searchId)" mat-button > <i class="material-icons">search</i> </button>
+      <button (click)="getProductsByName(searchName)" mat-button > <i class="material-icons">search</i> </button>
     </div>  
+    <mat-form-field>
+        <mat-label>Filter by category</mat-label>
+        <mat-select [formControl]="selectedCategories" multiple>
+          <mat-option *ngFor="let category of categoriesList" [value]="category._id">{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="handlePageEvent($event)"></mat-paginator>
   </mat-toolbar>
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="handlePageEvent($event)"></mat-paginator>
 
   <div class="result-contanier">
     <ng-container *ngIf="productsList" >

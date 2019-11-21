@@ -45,6 +45,7 @@ export class HttpService {
     let defaultConfig:httpConfig = {
       method:       'post',
       url:          'http://localhost:4000/graphql',
+      feedbackOnOK: false,
       feedbackMode: 'snackBar',
       feedbackMsg:  null,
       log:          null,
@@ -73,7 +74,9 @@ export class HttpService {
       console.groupEnd();
     }
 
-    this.showFeedback(_configuration);
+    if(_configuration.feedbackOnOK)
+      this.showFeedback(_configuration);
+      
   }
 
   private onError = (_err, _configuration:httpConfig)=>{

@@ -6,3 +6,12 @@ export interface Product {
     category: string
     edit?: boolean
 }
+
+export interface ProductList {
+    data:{
+        products:{
+            list: Product[];
+            count: number
+        }
+    }
+}

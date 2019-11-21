@@ -11,6 +11,12 @@ export class ProductsService {
     private httpSvc: HttpService
   ){}
 
+  public getProducts = (_filters, _elementsPerPage:number=0, _pageNumber:number=0)=>{
+    if(_filters.categories && _filters.categories.length)
+      return this.getProductsByCategories(_filters.categories, _elementsPerPage, _pageNumber)
+    else
+      return this.getAllProducts(_elementsPerPage, _pageNumber);
+  }
 
   public getProductById = (id: String)=>{
       
@@ -30,30 +36,50 @@ export class ProductsService {
 
   };
 
-  public getProductsByName = (name: String)=>{
-      
+  public getProductsByName = (name: String, _elementsPerPage:number=0, _pageNumber:number=0)=>{
+    const elementsSkipped = _pageNumber * _elementsPerPage;      
     const query = {
       query: `query{
-        productsByName(name:"${name}"){
-          _id
-          name
-          description
-          category
-          price
+        products: productsByNameAndCount(
+          name:"${name}",
+          limit: ${_elementsPerPage}, 
+          skip: ${elementsSkipped}
+        ){
+          list: products{_id name description price category} 
+          count 
+        }
+      }`
+    }
+    return this.httpSvc.request({body: query, log: 'getProductsByName'})
+
+  };
+
+  public getProductsByCategories = (_categories: Array<string>, _elementsPerPage:number=0, _pageNumber:number=0)=>{
+    const elementsSkipped = _pageNumber * _elementsPerPage;      
+    const query = {
+      query: `query{
+        products: productsByCategoriesAndCount(
+          categories: ${JSON.stringify(_categories)} , 
+          limit: ${_elementsPerPage}, 
+          skip: ${elementsSkipped}
+        ){
+          list: products {_id name description price category} 
+          count
         }
       }`
     }
 
-    return this.httpSvc.request({body: query, log: 'getProductById'})
+    return this.httpSvc.request({body: query, log: 'getProductsByCategories'})
 
   };
-  
+
   public getAllProducts = (_elementsPerPage:number=0, _pageNumber:number=0)=>{
     const elementsSkipped = _pageNumber * _elementsPerPage;
     const query = {
       query: `query{
-        products(limit: ${_elementsPerPage}, skip: ${elementsSkipped}){
-          _id name description price category
+        products: productsAndCount(limit: ${_elementsPerPage}, skip: ${elementsSkipped}){
+          list: products{_id name description price category}
+          count
         }
       }`
     }

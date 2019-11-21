@@ -1,8 +1,11 @@
 .search-input {
     min-width: 150px;
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 1;
+}
+
+.tools-bar{
+    background: white;
+    justify-content: space-between;
+    font-size: 15px;
 }
 
 .product-card{

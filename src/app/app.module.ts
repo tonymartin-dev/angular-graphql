@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 //Angular Material
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -63,7 +63,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   entryComponents: [AppComponent, NewProductModalComponent],
   providers: [],

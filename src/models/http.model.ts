@@ -1,6 +1,7 @@
 export interface httpConfig {
     url?: string
     method?: string
+    feedbackOnOK?: boolean
     feedbackMode?: 'snackBar' | 'page' | 'none'
     feedbackMsg?: string
     log?: string
