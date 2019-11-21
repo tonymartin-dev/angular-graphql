@@ -7,6 +7,11 @@ export interface Product {
     edit?: boolean
 }
 
+export interface CartProduct extends Product{
+    amount: number
+    total: number
+}
+
 export interface ProductList {
     data:{
         products:{

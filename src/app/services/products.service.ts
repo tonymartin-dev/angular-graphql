@@ -129,7 +129,12 @@ export class ProductsService {
       }`
     }
 
-    return this.httpSvc.request({body: query, log: 'editProduct'});
+    return this.httpSvc.request({
+      body: query, 
+      log: 'editProduct', 
+      feedbackOnOK: true, 
+      feedbackMsg: 'Producto editado con éxito'
+    });
 
   };
 

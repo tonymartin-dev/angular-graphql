@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../services/shared.service'
+import { CartService } from 'src/app/services/cart/cart.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +10,11 @@ import { SharedService } from '../../services/shared.service'
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private sharedService: SharedService
+    public sharedService: SharedService,
+    public cartSvc: CartService
   ){}
 
+  public cartLength = this.cartSvc.getCartLength();
   
   ngOnInit() {
   }

@@ -1,0 +1,11 @@
+.cart-table {
+  width: 80%;
+  margin: auto;
+  th {
+    text-align: center;
+  }
+  .number-input {
+    flex-grow: unset;
+    max-width: 50px;
+  }
+}

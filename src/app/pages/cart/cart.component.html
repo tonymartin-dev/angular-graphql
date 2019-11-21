@@ -1,0 +1,31 @@
+<table mat-table matSort [dataSource]="cartList" (matSortChange)="sortData($event)" class="cart-table mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-sort-header mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amount">
+    <th mat-sort-header mat-header-cell *matHeaderCellDef> Amount </th>
+    <!--<td mat-cell *matCellDef="let product"> {{product.amount}} </td>-->
+    <td mat-cell *matCellDef="let product"> 
+      <mat-form-field class="number-input">
+        <input matInput class="number-input" type="number" (change)="updateTotal(product)" [(ngModel)]="product.amount" >
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-sort-header mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let product"> {{product.total | currency }} </td>
+  </ng-container>
+        
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

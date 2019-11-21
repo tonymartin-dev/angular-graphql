@@ -8,6 +8,7 @@ import { NewProductModalComponent } from 'src/app/components/new-product-modal/n
 import { CategoriesService }        from 'src/app/services/categories.service';
 import { Category }                 from 'src/models/category.model';
 import { FormControl }              from '@angular/forms';
+import { CartService }              from 'src/app/services/cart/cart.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ShopComponent implements OnInit {
     private productsService:  ProductsService,
     private categoriesService:CategoriesService,
     private dialog:           MatDialog,
-    private snackBar:         MatSnackBar
+    private snackBar:         MatSnackBar,
+    private cartSvc:          CartService
   ){}
 
   selectedCategories = new FormControl();
@@ -37,7 +39,6 @@ export class ShopComponent implements OnInit {
     this.cancelProductChanges();
     this.productBackup = {..._product};
     _product.edit = true;
-    console.log('Backup: ', this.productBackup);
   }
 
   public deleteProduct = (_product: Product)=>{
@@ -56,17 +57,8 @@ export class ShopComponent implements OnInit {
   }
 
   public updateProduct = (_product: Product)=>{
-    this.productsService.editProduct(_product).subscribe(
-      res=>{
-        console.log('OK', res);
-        _product.edit = false;
-        this.openSnackBar('Guardado con éxito', 'Aceptar');
-      },
-      err=>{
-        console.log('KO', err);
-        this.openSnackBar('Se produjo un error en el guardado de datos', 'Aceptar');
-      }
-    )
+    this.productsService.editProduct(_product)
+      .subscribe(()=>_product.edit = false)
   }
 
   public cancelProductChanges = async(_product?: Product)=>{
@@ -75,7 +67,7 @@ export class ShopComponent implements OnInit {
     const index = this.getProductIndex(_product);
     this.productsList[index] = this.productBackup;
     this.productsList[index].edit = false;
-    console.log('Product restored: ', _product)
+    console.log(' *Product restored: ', {product: _product})
     return;
   }
 
@@ -160,6 +152,11 @@ export class ShopComponent implements OnInit {
 
   public getCategoryName = (_catId: string)=>{
     return this.categoriesList.find(cat=>cat._id === _catId).name
+  }
+
+  public addToCart = (_product: Product, _amount: number)=>{
+    this.cartSvc.addToCart(_product, _amount)
+    console.log('Cart Updated: ', this.cartSvc.getCartList())
   }
 
   private init = async()=>{

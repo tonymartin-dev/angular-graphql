@@ -92,6 +92,9 @@
           <mat-card-content class="product-card-content">
             <p>{{product.description}}</p>
             <div class="product-card-footer">
+              <button mat-button (click)="addToCart(product, 1)">
+                <mat-icon class="material-icons">shopping_cart</mat-icon>
+              </button>
               <span>{{ product.price | currency }}</span>
             </div>
           </mat-card-content>
