@@ -25,7 +25,7 @@ export class HttpService {
   public setToken = (_token:string)=>{
     this.bearerToken = _token;
     window.sessionStorage.setItem('authToken', _token);
-    setTimeout(this.refreshToken, 10 * 60 * 1000);
+    setTimeout(this.refreshToken, 5 * 60 * 1000);
   }
   
   public request = (_config:httpConfig)=>{
