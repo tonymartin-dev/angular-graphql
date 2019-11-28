@@ -1,10 +1,12 @@
 import { Injectable }               from '@angular/core';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
 import { MatSnackBar }              from '@angular/material/snack-bar';
-import { throwError }               from 'rxjs';
-import { share, tap, catchError }   from 'rxjs/operators';
+import { Router }                   from '@angular/router';
+import { throwError, Observable }   from 'rxjs';
+import { share }                    from 'rxjs/operators';
 import { httpConfig }               from 'src/models/http.model';
 import { SharedService }            from './shared.service';
+import { isArray } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +16,21 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   private bearerToken: String;
 
   public setToken = (_token:string)=>{
     this.bearerToken = _token;
-    setTimeout(this.refreshToken, 20000);
+    window.sessionStorage.setItem('authToken', _token);
+    setTimeout(this.refreshToken, 5 * 60 * 1000);
   }
   
   public request = (_config:httpConfig)=>{
     
-    let configuration = this.buildHttpConfig(_config);    
+    let configuration = this.buildHttpConfig(_config);
 
     if(configuration.showSpinner)
       this.sharedService.showSpinner();
@@ -36,17 +40,29 @@ export class HttpService {
       headers:  new HttpHeaders(configuration.headers)
     }
 
-    return this.http[configuration.method](
-      configuration.url,
-      configuration.method==='get' ? httpOptions : configuration.body,
-      configuration.method==='get' ? null : httpOptions
-    ).pipe(
-      tap(res=>this.onSuccess(res, configuration)),
-      catchError(err=>this.onError(err, configuration)),
-      share()
-    )
+    return new Observable((observer) => {
+      this.http[configuration.method](
+        configuration.url,
+        configuration.method==='get' ? httpOptions : configuration.body,
+        configuration.method==='get' ? null : httpOptions
+      )
+      .subscribe(
+        response=>{
+          if(response.errors && response.errors.length){
+            this.onError(response.errors, configuration)
+          }else{
+            this.onSuccess(response, configuration);
+            observer.next(response);
+          }
+          observer.complete();
+        },
+        error=>{
+          this.onError(error.message, configuration);
+        }
+      )
+    }).pipe(share());
 
-  };
+  }
 
   private buildHttpConfig = (_config:httpConfig)=>{
     let headers = {'Content-Type': 'application/json'}
@@ -101,7 +117,20 @@ export class HttpService {
       console.groupEnd();
     }
 
-    this.showFeedback(_configuration, true)
+    if(isArray(_err)){
+      const isUnauthorized = _err.some(e=>(
+        e.message === 'NO_TOKEN_PROVIDED' || e.message === 'EXPIRED' || e.message === 'INVALID_TOKEN'
+      ));
+      if(isUnauthorized){
+        _configuration.feedbackMsg = "You're not properly logged in";
+        window.sessionStorage.removeItem('authToken')
+      }
+      this.showFeedback(_configuration, true);
+    console.log(`%c||*UNAUTHORIZED*||%c Redirecting to login...`, 'background-color:red; padding: 2px;', '');
+      this.router.navigateByUrl('/');
+    }
+
+    this.showFeedback(_configuration, true);
 
     return throwError(_err);
   }
@@ -122,8 +151,8 @@ export class HttpService {
   }
 
   private refreshToken = ()=>{
-    return this.request({body: {query: 'query{refreshToken}'}, log: 'Refresh Token'}).subscribe(
-      (token)=>this.setToken(token.data.refreshToken)
+    return this.request({body: {query: 'query{refreshToken}'}, showSpinner: false, log: 'Refresh Token: ' + new Date().toLocaleTimeString()}).subscribe(
+      (token:any)=>this.setToken(token.data.refreshToken)
     );
   }
 
