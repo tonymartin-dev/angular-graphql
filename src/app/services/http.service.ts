@@ -17,6 +17,12 @@ export class HttpService {
     private snackBar: MatSnackBar
   ) { }
 
+  private bearerToken: String;
+
+  public setToken = (_token:string)=>{
+    this.bearerToken = _token;
+  }
+  
   public request = (_config:httpConfig)=>{
     
     let configuration = this.buildHttpConfig(_config);    
@@ -42,6 +48,10 @@ export class HttpService {
   };
 
   private buildHttpConfig = (_config:httpConfig)=>{
+    let headers = {'Content-Type': 'application/json'}
+    if(this.bearerToken){
+      headers = {...headers, ...{Authorization: `Bearer ${this.bearerToken}`} }
+    }
     let defaultConfig:httpConfig = {
       method:       'post',
       url:          'http://localhost:4000/graphql',
@@ -50,7 +60,7 @@ export class HttpService {
       feedbackMsg:  null,
       log:          null,
       params:       {},
-      headers:      {},
+      headers:      headers,
       body:         null,
       showSpinner:  true
     }
@@ -90,7 +100,7 @@ export class HttpService {
       console.groupEnd();
     }
 
-    this.showFeedback(_configuration)
+    this.showFeedback(_configuration, true)
 
     return throwError(_err);
   }
