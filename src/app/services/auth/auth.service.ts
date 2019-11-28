@@ -23,5 +23,9 @@ export class AuthService {
     return this.httpSvc.request({body: query, log: 'login'});
 
   }
+
+  public refreshToken = ()=>{
+    return this.httpSvc.request({body: {query: 'query{refreshToken}'}, log: 'login'});
+  }
   
 }

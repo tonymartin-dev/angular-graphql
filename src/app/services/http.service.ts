@@ -21,6 +21,7 @@ export class HttpService {
 
   public setToken = (_token:string)=>{
     this.bearerToken = _token;
+    setTimeout(this.refreshToken, 20000);
   }
   
   public request = (_config:httpConfig)=>{
@@ -118,6 +119,12 @@ export class HttpService {
         console.log('TODO: Redirect');
         break;
     }
+  }
+
+  private refreshToken = ()=>{
+    return this.request({body: {query: 'query{refreshToken}'}, log: 'Refresh Token'}).subscribe(
+      (token)=>this.setToken(token.data.refreshToken)
+    );
   }
 
 }
