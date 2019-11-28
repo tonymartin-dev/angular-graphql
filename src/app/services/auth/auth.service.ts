@@ -24,8 +24,16 @@ export class AuthService {
 
   }
 
-  public refreshToken = ()=>{
-    return this.httpSvc.request({body: {query: 'query{refreshToken}'}, log: 'login'});
+  public recoverToken = ()=>{
+    return window.sessionStorage.getItem('authToken');
+  }
+
+  public checkSession = ()=>{
+    return this.httpSvc.request({body: {query: 'query{checkSession}'}, log: 'Check Session'});
+  }
+
+  public checkAdmin = ()=>{
+    return this.httpSvc.request({body: {query: 'query{checkAdmin}'}, log: 'Check Session'});
   }
   
 }

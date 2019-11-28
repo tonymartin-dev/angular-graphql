@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   public login = (_user:string, _pass:string)=>{
     console.log('   Logging in')
     this.authSvc.login(_user, _pass).subscribe(
-      res=>{
+      (res:any)=>{
         this.httpSvc.setToken(res.data.login.token);
         this.router.navigateByUrl('/shop');
       }
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(`%c(Component initialized)%c Home`, 'background-color:blue; padding: 2px;', '');
   }
 
 }

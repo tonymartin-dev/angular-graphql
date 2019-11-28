@@ -137,6 +137,7 @@ export class ShopComponent implements OnInit {
   }
 
   private handleProductList = (_res: ProductList)=>{
+    if(!_res.data || !_res.data.products || !_res.data.products. list) return;
     this.productsList = _res.data.products.list;
     this.productsList.forEach(product => product.edit = false);
     this.length = _res.data.products.count;
@@ -144,7 +145,7 @@ export class ShopComponent implements OnInit {
 
   private getAllCategories = ()=>{
     const observable = this.categoriesService.getAllCategories()
-    observable.subscribe(res=>{
+    observable.subscribe((res:any)=>{
       this.categoriesList = res.data.categories;
     });
     return observable.toPromise()
